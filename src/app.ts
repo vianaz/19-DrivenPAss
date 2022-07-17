@@ -1,16 +1,20 @@
+import { errorHandlerMiddleware } from "@middlewares/ErrorHandlerMiddleware";
 import express, { Application } from "express";
+import "express-async-errors";
+import { AuthRouter } from "routers/AuthRouter";
 
 export class App {
   public app: Application;
-        
+
   constructor() {
     this.app = express();
-    this.routes();
+    this.middlewares();
+
+    new AuthRouter(this.app);
+    this.app.use(errorHandlerMiddleware);
   }
 
-  routes() {
-    this.app.get("/", (req, res) => {
-      res.send("Hello World");
-    });
+  private middlewares() {
+    this.app.use(express.json());
   }
 }
