@@ -1,0 +1,42 @@
+{
+  "name": "projeto19-drivenpass",
+  "version": "1.0.0",
+  "description": "API desenvolvida para projeto \"Driven Pass\"",
+  "main": "server.ts",
+  "repository": "https://github.com/vianaz/19-DrivenPAss",
+  "author": "Gabriel Viana Boaes",
+  "type": "commonjs",
+  "license": "MIT",
+  "dependencies": {
+    "@prisma/client": "4.0.0",
+    "bcrypt": "^5.0.1",
+    "cors": "^2.8.5",
+    "cryptr": "^6.0.3",
+    "express": "^4.18.1",
+    "express-async-errors": "^3.1.1",
+    "joi": "^17.6.0",
+    "prisma": "^4.0.0"
+  },
+  "devDependencies": {
+    "@types/bcrypt": "^5.0.0",
+    "@types/cryptr": "^4.0.1",
+    "@types/express": "^4.17.13",
+    "@types/jest": "^28.1.5",
+    "@typescript-eslint/eslint-plugin": "^5.30.6",
+    "@typescript-eslint/parser": "^5.30.6",
+    "dotenv": "^16.0.1",
+    "eslint": "^8.19.0",
+    "jest": "^28.1.3",
+    "supertest": "^6.2.4",
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.0.0",
+    "typescript": "^4.7.4"
+  },
+  "scripts": {
+    "test": "jest",
+    "studio": "prisma studio",
+    "migrate": "prisma migrate dev",
+    "reset": "prisma migrate reset",
+    "dev": "tsnd --transpile-only --respawn --ignore-watch node_modules -r dotenv/config -r tsconfig-paths/register src/server.ts"
+  }
+}

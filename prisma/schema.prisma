@@ -1,0 +1,87 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Card {
+  debito
+  credito
+  ambos
+}
+
+model Users {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+
+  wifis       Wifis[]
+  safetyNotes SafetyNotes[]
+  cards       Cards[]
+  credentials Credentials[]
+
+
+  @@map("users")
+}
+
+model Wifis {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  name      String
+  password  String
+  createdAt DateTime @default(now())
+
+  user Users @relation(fields: [userId], references: [id])
+
+  @@map("wifi")
+}
+
+model SafetyNotes {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  note      String
+  createdAt DateTime @default(now())
+
+  user Users @relation(fields: [userId], references: [id])
+
+  @@map("safety_notes")
+}
+
+model Cards {
+  id         String   @id @default(cuid())
+  userId     String
+  title      String
+  name       String
+  type       Card
+  cardholder String   @unique
+  expiration String
+  password   String
+  isVirtual  Boolean  @default(false)
+  createdAt  DateTime @default(now())
+
+  user Users @relation(fields: [userId], references: [id])
+
+  @@map("cards")
+}
+
+model Credentials {
+  id        String   @id @default(cuid())
+  userId    String
+  title     String
+  username  String
+  password  String
+  createdAt DateTime @default(now())
+
+  user Users @relation(fields: [userId], references: [id])
+
+  @@map("credentials")
+}
