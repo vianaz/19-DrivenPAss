@@ -1,5 +1,6 @@
 import { Credential } from "@interfaces/interfaces";
 import {
+  DeleteCredentialServices,
   GetCredentialServices,
   insertCredentialServices,
 } from "@services/CredentialServices";
@@ -38,6 +39,11 @@ export class CredentialController {
 
   // ? Delete Credential
   deleteCredential = async (req: Request, res: Response) => {
+    const deleteCredentialService = new DeleteCredentialServices();
+    const { id: cretendialId } = req.params;
+
+    await deleteCredentialService.deleteCredential(cretendialId);
+
     res.send("Credential deleted");
   };
 }

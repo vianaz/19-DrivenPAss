@@ -18,10 +18,14 @@ export class CredentialRepository {
     });
   }
 
-  async getCredentialById(id: string) {
+  async getCredentialById(cretendialId: string) {
     return await prisma.credentials.findUnique({
-      where: { id },
+      where: { id: cretendialId },
     });
+  }
+
+  async deleteCredentialById(credentialId: string) {
+    return await prisma.credentials.delete({ where: { id: credentialId } });
   }
 }
 

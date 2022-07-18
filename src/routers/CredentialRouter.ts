@@ -7,6 +7,6 @@ export class CrendentialRouter {
 
     app.post("/credential", credentialController.insertCredential);
     app.get("/credential/:id?", credentialController.getCredential);
-    app.delete("/credential/:id?", credentialController.deleteCredential);
+    app.delete("/credential/:id", credentialController.deleteCredential);
   }
 }

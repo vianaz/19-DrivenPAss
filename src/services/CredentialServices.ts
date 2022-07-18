@@ -18,9 +18,8 @@ export class insertCredentialServices {
 
     if (tittleArealdyUsed) throw errorFactory("error_title_already_used");
 
-    const credentialDataWithPasswordEncrypted = this.handlerDataSignUpEncrypt(
-      formatedCredential as Credentials,
-    );
+    const credentialDataWithPasswordEncrypted =
+      this.handlerDataCredentialEncrypt(formatedCredential as Credentials);
 
     const { id: cretendialId } = await credentialRepository.insertCredential(
       credentialDataWithPasswordEncrypted,
@@ -28,7 +27,7 @@ export class insertCredentialServices {
 
     return { cretendialId };
   };
-  handlerDataSignUpEncrypt = (credential: Credentials): Credentials => {
+  handlerDataCredentialEncrypt = (credential: Credentials): Credentials => {
     const cryptr = new CryptUtils();
     let { password } = credential;
 
@@ -41,10 +40,39 @@ export class insertCredentialServices {
 export class GetCredentialServices {
   getCredential = async (userId: string, credentialId?: string) => {
     const credentialRepository = new CredentialRepository();
+    if (credentialId) {
+      const cretendial = (await credentialRepository.getCredentialById(
+        credentialId,
+      )) as Credentials;
 
-    if (credentialId)
-      return credentialRepository.getCredentialById(credentialId);
+      return this.handlerDataCredentialDecrypt(cretendial);
+    }
 
-    return credentialRepository.getAllCredentials(userId);
+    const cretendial = await credentialRepository.getAllCredentials(userId);
+    return this.handlerDataCredentialDecrypt(cretendial);
+  };
+
+  handlerDataCredentialDecrypt = (credential: Credentials | Credential[]) => {
+    const cryptr = new CryptUtils();
+
+    if (Array.isArray(credential)) {
+      const teste = credential.map((credential) => {
+        return {
+          ...credential,
+          password: cryptr.decrypt(credential.password),
+        };
+      });
+      return teste;
+    }
+
+    return { ...credential, password: cryptr.decrypt(credential.password) };
+  };
+}
+
+export class DeleteCredentialServices {
+  deleteCredential = async (credentialId: string) => {
+    const credentialRepository = new CredentialRepository();
+
+    await credentialRepository.deleteCredentialById(credentialId);
   };
 }
