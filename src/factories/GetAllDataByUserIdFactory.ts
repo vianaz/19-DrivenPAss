@@ -6,7 +6,7 @@ export class GetDataAllFactory {
   constructor(type: TableTypes) {
     if (type === "cards") this.getAllCard();
     else if (type === "credentials") this.getAllCredential();
-    else if (type === "note") this.GetAllSafetyNote();
+    else if (type === "safetyNotes") this.GetAllSafetyNote();
     else if (type === "wifis") this.getAllWifi();
   }
 

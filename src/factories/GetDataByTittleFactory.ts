@@ -6,14 +6,14 @@ export class GetDataByTittleFactory {
   constructor(id: string, tittle: string, type: TableTypes) {
     if (type === "cards") this.getCard(id, tittle);
     else if (type === "credentials") this.getCredential(id, tittle);
-    else if (type === "note") this.getSafetyNote(id, tittle);
+    else if (type === "safetyNotes") this.getSafetyNote(id, tittle);
     else if (type === "wifis") this.getWifi(id, tittle);
   }
 
   getCard = (id: string, title: string) => {
     this.query = {
       where: { id },
-      select: { credentials: { where: { title } } },
+      select: { cards: { where: { title } } },
     };
   };
   getCredential = (id: string, title: string) => {
@@ -25,13 +25,13 @@ export class GetDataByTittleFactory {
   getSafetyNote = (id: string, title: string) => {
     this.query = {
       where: { id },
-      select: { credentials: { where: { title } } },
+      select: { safetyNotes: { where: { title } } },
     };
   };
   getWifi = (id: string, title: string) => {
     this.query = {
       where: { id },
-      select: { credentials: { where: { title } } },
+      select: { wifis: { where: { title } } },
     };
   };
 }

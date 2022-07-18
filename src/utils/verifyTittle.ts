@@ -11,7 +11,6 @@ export const verifyTitle = async (
   const thisTittleOfUserAlreadyExists = (
     await credentialRepository.getDataByTitle(id, title, type)
   )[type][0];
-  console.log(thisTittleOfUserAlreadyExists);
 
   return !!thisTittleOfUserAlreadyExists;
 };

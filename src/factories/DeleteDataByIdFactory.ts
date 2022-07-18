@@ -6,7 +6,7 @@ export class DeleteDataByIdFactory {
   constructor(type: TableTypes) {
     if (type === "cards") this.deleteCard();
     else if (type === "credentials") this.deleteCredential();
-    else if (type === "note") this.deleteSafetyNote();
+    else if (type === "safetyNotes") this.deleteSafetyNote();
     else if (type === "wifis") this.deleteWifi();
   }
 
@@ -14,8 +14,6 @@ export class DeleteDataByIdFactory {
     this.query = prisma.cards.delete;
   };
   deleteCredential = () => {
-    console.log("passei aqui");
-
     this.query = prisma.credentials.delete;
   };
   deleteSafetyNote = () => {

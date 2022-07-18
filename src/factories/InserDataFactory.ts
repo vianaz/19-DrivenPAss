@@ -6,7 +6,7 @@ export class InsertDataFactory {
   constructor(type: TableTypes) {
     if (type === "cards") this.insertCard();
     else if (type === "credentials") this.insertCredential();
-    else if (type === "note") this.insertSafetyNote();
+    else if (type === "safetyNotes") this.insertSafetyNote();
     else if (type === "wifis") this.insertWifi();
   }
 

@@ -1,4 +1,4 @@
-import { SafetyNoteController } from "@controllers/SafetyRouterController";
+import { SafetyNoteController } from "@controllers/SafetyController";
 import { Application } from "express";
 
 export class SafetyNoteRouter {

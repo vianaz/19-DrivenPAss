@@ -6,8 +6,9 @@ export type Error = {
   message: string;
 };
 export type Credential = Omit<Credentials, "id" | "userId">;
-export type SafetyNote = Omit<SafetyNotes, "id" | "userId">;
-export type TableTypes = "credentials" | "note" | "wifis" | "cards";
+export type Note = Omit<SafetyNotes, "id" | "userId">;
+export type Wifi = Omit<Wifis, "id" | "userId">;
+export type TableTypes = "credentials" | "safetyNotes" | "wifis" | "cards";
 export type TittleReturnTypes =
   | {
       credentials: Credentials[];

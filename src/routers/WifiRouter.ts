@@ -1,6 +1,7 @@
+import { WifiController } from "@controllers/WifiController";
 import { Application } from "express";
 
-export class CrendentialRouter {
+export class WifiRouter {
   constructor(app: Application) {
     const wifiController = new WifiController();
 
