@@ -1,6 +1,6 @@
 import { Credential } from "@interfaces/interfaces";
 import { Credentials } from "@prisma/client";
-import { CredentialRepository } from "@repositories/CredentialRepository";
+import { CredentialRepository } from "@repositories/IndexRepository";
 import { CryptUtils } from "@utils/cryptUtils";
 import { errorFactory } from "@utils/errorFactory";
 import { verifyTitle } from "@utils/verifyTittle";
@@ -21,8 +21,9 @@ export class insertCredentialServices {
     const credentialDataWithPasswordEncrypted =
       this.handlerDataCredentialEncrypt(formatedCredential as Credentials);
 
-    const { id: cretendialId } = await credentialRepository.insertCredential(
+    const { id: cretendialId } = await credentialRepository.insertData(
       credentialDataWithPasswordEncrypted,
+      "credential",
     );
 
     return { cretendialId };
@@ -41,14 +42,15 @@ export class GetCredentialServices {
   getCredential = async (userId: string, credentialId?: string) => {
     const credentialRepository = new CredentialRepository();
     if (credentialId) {
-      const cretendial = (await credentialRepository.getCredentialById(
+      const cretendial = (await credentialRepository.getDataById(
         credentialId,
+        "credential",
       )) as Credentials;
 
       return this.handlerDataCredentialDecrypt(cretendial);
     }
 
-    const cretendial = await credentialRepository.getAllCredentials(userId);
+    const cretendial = await credentialRepository.getAllDataByUserId(userId, "credential");
     return this.handlerDataCredentialDecrypt(cretendial);
   };
 
@@ -73,6 +75,6 @@ export class DeleteCredentialServices {
   deleteCredential = async (credentialId: string) => {
     const credentialRepository = new CredentialRepository();
 
-    await credentialRepository.deleteCredentialById(credentialId);
+    await credentialRepository.deleteDataById(credentialId, "credential");
   };
 }

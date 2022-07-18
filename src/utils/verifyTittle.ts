@@ -1,4 +1,4 @@
-import { CredentialRepository } from "@repositories/CredentialRepository";
+import { CredentialRepository } from "@repositories/IndexRepository";
 
 export const verifyTitle = async (id: string, title: string) => {
   const credentialRepository = new CredentialRepository();
