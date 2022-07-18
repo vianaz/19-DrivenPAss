@@ -7,5 +7,6 @@ export const errorHandlerMiddleware = (
   res: Response,
   next: NextFunction,
 ) => {
+  
   return res.status(err.statusCode).send(err.message);
 };
