@@ -14,7 +14,7 @@ export class insertCredentialServices {
       userId: id,
     }) as unknown;
 
-    const tittleArealdyUsed = await verifyTitle(id, credential.title);
+    const tittleArealdyUsed = await verifyTitle(id, credential.title, "credentials");
 
     if (tittleArealdyUsed) throw errorFactory("error_title_already_used");
 
@@ -23,7 +23,7 @@ export class insertCredentialServices {
 
     const { id: cretendialId } = await credentialRepository.insertData(
       credentialDataWithPasswordEncrypted,
-      "credential",
+      "credentials",
     );
 
     return { cretendialId };
@@ -44,13 +44,13 @@ export class GetCredentialServices {
     if (credentialId) {
       const cretendial = (await credentialRepository.getDataById(
         credentialId,
-        "credential",
+        "credentials",
       )) as Credentials;
 
       return this.handlerDataCredentialDecrypt(cretendial);
     }
 
-    const cretendial = await credentialRepository.getAllDataByUserId(userId, "credential");
+    const cretendial = await credentialRepository.getAllDataByUserId(userId, "credentials");
     return this.handlerDataCredentialDecrypt(cretendial);
   };
 
@@ -75,6 +75,6 @@ export class DeleteCredentialServices {
   deleteCredential = async (credentialId: string) => {
     const credentialRepository = new CredentialRepository();
 
-    await credentialRepository.deleteDataById(credentialId, "credential");
+    await credentialRepository.deleteDataById(credentialId, "credentials");
   };
 }

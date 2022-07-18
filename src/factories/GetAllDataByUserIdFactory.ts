@@ -4,10 +4,10 @@ import { prisma } from "db/database";
 export class GetDataAllFactory {
   public query: any;
   constructor(type: TableTypes) {
-    if (type === "card") this.getAllCard();
-    else if (type === "credential") this.getAllCredential();
+    if (type === "cards") this.getAllCard();
+    else if (type === "credentials") this.getAllCredential();
     else if (type === "note") this.GetAllSafetyNote();
-    else if (type === "wifi") this.getAllWifi();
+    else if (type === "wifis") this.getAllWifi();
   }
 
   getAllCard = () => {

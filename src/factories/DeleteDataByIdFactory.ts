@@ -4,16 +4,18 @@ import { prisma } from "db/database";
 export class DeleteDataByIdFactory {
   public query: any;
   constructor(type: TableTypes) {
-    if (type === "card") this.deleteCard();
-    else if (type === "credential") this.deleteCredential();
+    if (type === "cards") this.deleteCard();
+    else if (type === "credentials") this.deleteCredential();
     else if (type === "note") this.deleteSafetyNote();
-    else if (type === "wifi") this.deleteWifi();
+    else if (type === "wifis") this.deleteWifi();
   }
 
   deleteCard = () => {
     this.query = prisma.cards.delete;
   };
   deleteCredential = () => {
+    console.log("passei aqui");
+
     this.query = prisma.credentials.delete;
   };
   deleteSafetyNote = () => {

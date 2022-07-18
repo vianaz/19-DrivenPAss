@@ -41,7 +41,7 @@ model Wifis {
 
   user Users @relation(fields: [userId], references: [id])
 
-  @@map("wifi")
+  @@map("wifis")
 }
 
 model SafetyNotes {
@@ -53,7 +53,7 @@ model SafetyNotes {
 
   user Users @relation(fields: [userId], references: [id])
 
-  @@map("safety_notes")
+  @@map("note")
 }
 
 model Cards {
@@ -70,7 +70,7 @@ model Cards {
 
   user Users @relation(fields: [userId], references: [id])
 
-  @@map("cards")
+  @@map("card")
 }
 
 model Credentials {
@@ -84,5 +84,5 @@ model Credentials {
 
   user Users @relation(fields: [userId], references: [id])
 
-  @@map("credentials")
+  @@map("credential")
 }

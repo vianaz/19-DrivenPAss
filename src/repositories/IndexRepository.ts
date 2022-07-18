@@ -3,13 +3,19 @@ import { prisma } from "db/database";
 import { DeleteDataByIdFactory } from "factories/DeleteDataByIdFactory";
 import { GetDataAllFactory } from "factories/GetAllDataByUserIdFactory";
 import { GetDataByIdFactory } from "factories/GetDataByIdFactory";
+import { GetDataByTittleFactory } from "factories/GetDataByTittleFactory";
 import { InsertDataFactory } from "factories/InserDataFactory";
 
 export class CredentialRepository {
   async getCredentialByType(id: string, title?: string): Promise<any> {
-    const query = new CredentialQueryFactory(id, title).query;
+    const { query } = new CredentialQueryFactory(id, title);
 
     return await prisma.users.findUnique(query);
+  }
+
+  async getDataByTitle(id: string, title: string, type: TableTypes) {
+    const { query } = new GetDataByTittleFactory(id, title, type);
+    return (await prisma.users.findUnique(query)) as any;
   }
 
   async insertData(data: any, type: TableTypes) {
@@ -41,7 +47,7 @@ class CredentialQueryFactory {
   public query: any;
 
   constructor(id: string, title?: string) {
-    if (title) this.getByTitle(id, title);
+    if (title) this.getCredentialByTitle(id, title);
     else if (id) this.getByUserId(id);
   }
 
@@ -49,7 +55,7 @@ class CredentialQueryFactory {
     this.query = { where: { id } };
   }
 
-  getByTitle = (id: string, title: string) => {
+  getCredentialByTitle = (id: string, title: string) => {
     this.query = {
       where: { id },
       include: { credentials: { where: { title } } },
