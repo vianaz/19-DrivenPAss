@@ -1,22 +1,37 @@
-import { Note } from "@interfaces/interfaces";
-import { InsertNoteServices } from "@services/SafetyNoteServices";
+import { Card } from "@interfaces/interfaces";
+import {
+  DeleteCardServices,
+  GetCardServices,
+  InsertCardService,
+} from "@services/CardServices";
 import { Request, Response } from "express";
 
-export class SafetyNoteController {
-  insertSafetyNote = async (req: Request<Note, Note, Note>, res: Response) => {
-    const insertCredentialService = new InsertNoteServices();
+export class CardController {
+  insertCard = async (req: Request<Card, Card, Card>, res: Response) => {
+    const insertCardService = new InsertCardService();
     const { user } = req as any;
-    const noteInfo = req.body;
+    const cardInfo = req.body;
 
-    const { noteId } = await insertCredentialService.insertNote(user, noteInfo);
+    const { cardId } = await insertCardService.insertCard(user, cardInfo);
 
-    res.status(201).send({ noteId });
-    res.send("insertSafetyNote");
+    res.status(201).send({ cardId });
   };
-  getSafetyNote = async (req: Request, res: Response) => {
-    res.send("getSafetyNote");
+  getCard = async (req: Request, res: Response) => {
+    const getCardService = new GetCardServices();
+
+    const { id } = req.params;
+    const { user } = req as any;
+
+    const card = await getCardService.getWifi(user.id, id);
+
+    res.send(card);
   };
-  deleteSafetyNote = async (req: Request, res: Response) => {
-    res.send("deleteSafetyNote");
+  deleteCard = async (req: Request, res: Response) => {
+    const deleteNotesService = new DeleteCardServices();
+    const { id: cardId } = req.params;
+
+    await deleteNotesService.deleteCard(cardId);
+
+    res.send("Card deleted");
   };
 }

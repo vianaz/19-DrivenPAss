@@ -1,7 +1,7 @@
-import { cardController } from "@controllers/cardController";
+import { CardController } from "@controllers/CardController";
 import { Application } from "express";
 
-export class CrendentialRouter {
+export class CardRouter {
   constructor(app: Application) {
     const cardController = new CardController();
 

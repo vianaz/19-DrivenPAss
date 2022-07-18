@@ -13,7 +13,7 @@ datasource db {
 enum Card {
   debito
   credito
-  ambos
+  os_dois
 }
 
 model Users {
@@ -65,6 +65,7 @@ model Cards {
   cardholder String   @unique
   expiration String
   password   String
+  cvv        String
   isVirtual  Boolean  @default(false)
   createdAt  DateTime @default(now())
 

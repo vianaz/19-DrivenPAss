@@ -3,6 +3,7 @@ import { tokenMiddleware } from "@middlewares/tokenMiddleware";
 import express, { Application } from "express";
 import "express-async-errors";
 import { AuthRouter } from "routers/AuthRouter";
+import { CardRouter } from "routers/CardRouter";
 import { CrendentialRouter } from "routers/CredentialRouter";
 import { SafetyNoteRouter } from "routers/SafetyNoteRouter";
 import { WifiRouter } from "routers/WifiRouter";
@@ -38,5 +39,6 @@ export class App {
     new CrendentialRouter(app);
     new SafetyNoteRouter(app);
     new WifiRouter(app);
+    new CardRouter(app);
   };
 }

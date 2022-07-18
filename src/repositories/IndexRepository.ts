@@ -20,6 +20,7 @@ export class CredentialRepository {
 
   async insertData(data: any, type: TableTypes) {
     const { query } = new InsertDataFactory(type);
+
     return await query({ data });
   }
 

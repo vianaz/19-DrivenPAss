@@ -13,6 +13,7 @@ export class SignUpServices {
   constructor() {
     this.userRepository = new UserRepository();
   }
+
   insertUser = async (signUpData: User) => {
     const { userRepository } = this;
     const user = await userRepository.getUserByEmail(signUpData.email);
@@ -22,6 +23,7 @@ export class SignUpServices {
     const signUpDataHandled = this.handlerDataSignUpEncrypt(signUpData);
     await userRepository.insertUser(signUpDataHandled);
   };
+
   handlerDataSignUpEncrypt = (signUpData: User) => {
     const cryptr = new CryptUtils();
     let { email, password } = signUpData;
@@ -37,6 +39,7 @@ export class SignInServices {
   constructor() {
     this.userRepository = new UserRepository();
   }
+
   signIn = async (email: string, password: string) => {
     const { userRepository } = this;
     const user = await userRepository.getUserByEmail(email);
@@ -53,6 +56,7 @@ export class SignInServices {
 
     return token;
   };
+
   jwtSign = async (user: Users) => {
     const { id } = user;
 
