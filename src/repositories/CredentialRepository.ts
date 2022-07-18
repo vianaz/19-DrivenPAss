@@ -9,12 +9,18 @@ export class CredentialRepository {
   }
 
   async insertCredential(credential: Credentials) {
-    await prisma.credentials.create({ data: credential });
+    return await prisma.credentials.create({ data: credential });
   }
 
-  async getAllCredentials(id: string) {
+  async getAllCredentials(userId: string) {
     return await prisma.credentials.findMany({
-      where: { userId: id },
+      where: { userId },
+    });
+  }
+
+  async getCredentialById(id: string) {
+    return await prisma.credentials.findUnique({
+      where: { id },
     });
   }
 }

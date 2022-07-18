@@ -1,5 +1,8 @@
 import { Credential } from "@interfaces/interfaces";
-import { insertCredentialServices } from "@services/CredentialServices";
+import {
+  GetCredentialServices,
+  insertCredentialServices,
+} from "@services/CredentialServices";
 import { verifyTitle } from "@utils/verifyTittle";
 import { Request, Response } from "express";
 
@@ -13,18 +16,24 @@ export class CredentialController {
     const { user } = req as any;
     const credentials = req.body;
 
-    await insertCredentialService.insertCredential(user, credentials);
+    const { cretendialId } = await insertCredentialService.insertCredential(
+      user,
+      credentials,
+    );
 
-    res.status(201).send("Credential created");
+    res.status(201).send({ cretendialId });
   };
 
   // ? Get Credentials / Get Credential
   getCredential = async (req: Request, res: Response) => {
+    const getCredentialService = new GetCredentialServices();
+
     const { id } = req.params;
     const { user } = req as any;
 
-    
-    res.send("Credential");
+    const credential = await getCredentialService.getCredential(user.id, id);
+
+    res.send(credential);
   };
 
   // ? Delete Credential

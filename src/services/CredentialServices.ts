@@ -22,7 +22,11 @@ export class insertCredentialServices {
       formatedCredential as Credentials,
     );
 
-    credentialRepository.insertCredential(credentialDataWithPasswordEncrypted);
+    const { id: cretendialId } = await credentialRepository.insertCredential(
+      credentialDataWithPasswordEncrypted,
+    );
+
+    return { cretendialId };
   };
   handlerDataSignUpEncrypt = (credential: Credentials): Credentials => {
     const cryptr = new CryptUtils();
@@ -31,5 +35,16 @@ export class insertCredentialServices {
     password = cryptr.encrypt(password);
 
     return { ...credential, password };
+  };
+}
+
+export class GetCredentialServices {
+  getCredential = async (userId: string, credentialId?: string) => {
+    const credentialRepository = new CredentialRepository();
+
+    if (credentialId)
+      return credentialRepository.getCredentialById(credentialId);
+
+    return credentialRepository.getAllCredentials(userId);
   };
 }
