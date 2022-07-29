@@ -6,9 +6,10 @@ export const tokenMiddleware = (
   res: Response,
   next: NextFunction,
 ) => {
-  const token =
+  const token = (
     (req.headers["x-access-token"] as string) ||
-    (req.headers["authorization"] as string);
+    (req.headers["authorization"] as string)
+  ).split(" ")[1];
 
   if (!token) {
     return res.status(401).send("No token provided");

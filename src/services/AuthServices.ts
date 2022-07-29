@@ -21,6 +21,7 @@ export class SignUpServices {
     if (user) throw errorFactory("error_user_already_exists");
 
     const signUpDataHandled = this.handlerDataSignUpEncrypt(signUpData);
+
     await userRepository.insertUser(signUpDataHandled);
   };
 
@@ -54,7 +55,7 @@ export class SignInServices {
 
     const token = await this.jwtSign(user);
 
-    return token;
+    return { token };
   };
 
   jwtSign = async (user: Users) => {
