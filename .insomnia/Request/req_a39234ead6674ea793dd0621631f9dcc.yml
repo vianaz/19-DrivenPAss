@@ -1,0 +1,24 @@
+_id: req_a39234ead6674ea793dd0621631f9dcc
+type: Request
+parentId: fld_4a3c5a2313454576ab4a7e4a67ad4e05
+modified: 1659123155885
+created: 1658074320797
+url: "{{ _.URI }}/cl66v197400106pp4luf9njfu"
+name: Credential by id
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication:
+  type: bearer
+  token: "{{ _.token }}"
+  disabled: false
+metaSortKey: -1658065012444.5
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

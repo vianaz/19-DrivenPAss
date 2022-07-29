@@ -1,0 +1,24 @@
+_id: req_3862dbd8d9a1454399b88de355e4b34c
+type: Request
+parentId: fld_6b9cadcd6f6b44c3a4de2dc78dbfdf19
+modified: 1659123373748
+created: 1658081358765
+url: "{{ _.URI }}/cl66v79dx0097rbp48kw8b08s"
+name: Note by id
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication:
+  type: bearer
+  token: "{{ _.token }}"
+  disabled: false
+metaSortKey: -1658065012444.5
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global

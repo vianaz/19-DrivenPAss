@@ -1,0 +1,24 @@
+_id: req_8a00770d2b6c4b68b1cae87e2b01df08
+type: Request
+parentId: fld_36d2fe33777f499dba3ec75e5cbaba33
+modified: 1659123660828
+created: 1658085553004
+url: "{{ _.URI }}/cl66vd3v80215rbp4gjshs361"
+name: Card by id
+description: ""
+method: GET
+body: {}
+parameters: []
+headers: []
+authentication:
+  type: bearer
+  token: "{{ _.token }}"
+  disabled: false
+metaSortKey: -1658065012444.5
+isPrivate: false
+settingStoreCookies: true
+settingSendCookies: true
+settingDisableRenderRequestBody: false
+settingEncodeUrl: true
+settingRebuildPath: true
+settingFollowRedirects: global
